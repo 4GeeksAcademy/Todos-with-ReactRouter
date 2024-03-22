@@ -1,0 +1,21 @@
+img {
+    border-radius: 70px;
+    height: 125px;
+}
+
+.fa-map-marker-alt:before  {
+    margin-right: 15px;
+}
+
+.fa-phone:before {
+    margin-right: 15px;
+}
+
+.fa-envelope:before {
+    margin-right: 15px;
+}
+
+.cartas {
+    border: 2px solid rgba(0, 0, 0, .125);
+}
+

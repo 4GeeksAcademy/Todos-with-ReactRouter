@@ -1,42 +1,57 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
-
 import { Context } from "../store/appContext";
-
 import "../../styles/demo.css";
 
 export const Demo = () => {
 	const { store, actions } = useContext(Context);
+	const [fullName, setFullName] = useState("");
+	const [email, setEmail] = useState("");
+	const [phone, setPhone] = useState("");
+	const [address, setAddress] = useState("");
 
 	return (
 		<div className="container">
-			<ul className="list-group">
-				{store.demo.map((item, index) => {
-					return (
-						<li
-							key={index}
-							className="list-group-item d-flex justify-content-between"
-							style={{ background: item.background }}>
-							<Link to={"/single/" + index}>
-								<span>Link to: {item.title}</span>
-							</Link>
-							{// Conditional render example
-							// Check to see if the background is orange, if so, display the message
-							item.background === "orange" ? (
-								<p style={{ color: item.initial }}>
-									Check store/flux.js scroll to the actions to see the code
-								</p>
-							) : null}
-							<button className="btn btn-success" onClick={() => actions.changeColor(index, "orange")}>
-								Change Color
-							</button>
-						</li>
-					);
-				})}
-			</ul>
-			<br />
+			<form>
+				<h1 className="text-center">Add a new contact</h1>
+				<div className="mb-3">
+					<label for="exampleInputFullName" className="form-label">Full Name</label>
+					<input type="text" className="form-control" id="exampleInputFullName" placeholder="Full Name"
+						onChange={(e) => setFullName(e.target.value)}
+						value={fullName}
+					/>
+				</div>
+				<div className="mb-3">
+					<label for="exampleInputEmail" className="form-label">Email</label>
+					<input type="email" className="form-control" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter email"
+						onChange={(e) => setEmail(e.target.value)}
+						value={email}
+					/>
+				</div>
+				<div className="mb-3">
+					<label for="exampleInputPhone" className="form-label">Phone</label>
+					<input type="text" className="form-control" id="exampleInputPhone" placeholder="Enter phone"
+						onChange={(e) => setPhone(e.target.value)}
+						value={phone}
+					/>
+				</div>
+				<div className="mb-3">
+					<label for="exampleInputAddress" className="form-label">Address</label>
+					<input type="text" className="form-control" id="exampleInputAddress" placeholder="Enter address"
+						onChange={(e) => setAddress(e.target.value)}
+						value={address}
+					/>
+				</div>
+				<button type="submit" className="btn btn-primary w-100" onClick={() => actions.createOneContact({
+						full_name: fullName,
+						email: email,
+						agenda_slug: "ines",
+						address: address,
+						phone: phone
+				})}>save</button>
+			</form>
 			<Link to="/">
-				<button className="btn btn-primary">Back home</button>
+				<p>or get back to contacts</p>
 			</Link>
 		</div>
 	);
