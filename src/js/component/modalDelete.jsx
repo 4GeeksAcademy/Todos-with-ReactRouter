@@ -3,9 +3,17 @@ import { Context } from "../store/appContext.js";
 
 export const ModalDelete = (props) => {
     const {actions} = useContext(Context);
+
+    const onDeleteClick = () => {
+        if (props.contactId === undefined) {
+            actions.deleteAllContacts(props.agenda)
+        } else {
+            actions.deleteOneContact(props.contactId)
+        }
+    }
    
 	return (
-		<div class="modal fade" id="modalDelete" aria-labelledby="exampleModalLabel" tabindex="-1" aria-hidden="true">
+		<div className="modal fade" id={props.modalId} aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div className="modal-dialog">
                 <div className="modal-content">
                     <div className="modal-header">
@@ -17,7 +25,7 @@ export const ModalDelete = (props) => {
                     </div>
                     <div className="modal-footer">
                         <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Oh no!</button>
-                        <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={() => actions.deleteOneContact(props.contactId)}>
+                        <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={onDeleteClick}>
                                 Yes baby!
                         </button>
                     </div>
@@ -27,3 +35,4 @@ export const ModalDelete = (props) => {
 	);
 };
 
+/* actions.deleteOneContact(props.contactId) */

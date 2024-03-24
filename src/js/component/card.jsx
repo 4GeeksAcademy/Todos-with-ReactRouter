@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types"; 
 import {ModalDelete} from "../component/modalDelete.jsx";
+import { Link } from "react-router-dom";
 
 export const Card = (props) => {
 	return (
@@ -16,11 +17,13 @@ export const Card = (props) => {
 					</div>
 				</div>
 				<div>
-					<span><i className="fas fa-pen m-3"/></span>
-					<span><i className="fas fa-trash" data-bs-toggle="modal" data-bs-target="#modalDelete" /></span>
+					<Link to={`/update/${props.id}`}>
+						<span><i className="fas fa-pen m-3 text-dark "/></span>
+					</Link>
+					<span><i className="fas fa-trash" data-bs-toggle="modal" data-bs-target={`#modal-${props.id}`} /></span>
 				</div>
 			</div>
-			<ModalDelete contactId={props.id}/>
+			{<ModalDelete contactId={props.id} modalId={`modal-${props.id}`} />}
 		</>
 	);
 };
@@ -31,7 +34,7 @@ Card.propTypes = {
     fullName: PropTypes.string,
     address: PropTypes.string,
     phone: PropTypes.string,
-    email: PropTypes.string
+    email: PropTypes.string,
 };
 
  

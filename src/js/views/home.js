@@ -1,7 +1,7 @@
 import React, {useContext, useEffect} from "react";
 import { Card } from "../component/card.jsx";
 import { Context } from "../store/appContext.js";
-import { ModalDeleteAll } from "../component/modalDeleteAll.jsx";
+import { ModalDelete } from "../component/modalDelete.jsx";
 import "../../styles/home.css";
 
 export const Home = () => {
@@ -28,10 +28,10 @@ export const Home = () => {
 					);
 				})}
 			</div>
-			<div class="col-2 mx-auto">
+			<div className="col-2 mx-auto">
 				<button className="btn btn-danger my-2 text-center" data-bs-toggle="modal" data-bs-target="#modalDeleteAll">  Delete All Contacts</button>
 			</div>
-			<ModalDeleteAll agenda={"ines"}/>
+			<ModalDelete agenda={"ines"} modalId={"modalDeleteAll"} />
 		</>
 	);
 };
