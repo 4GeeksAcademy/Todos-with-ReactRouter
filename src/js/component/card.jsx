@@ -8,7 +8,7 @@ export const Card = (props) => {
 		<>
 			<div className="p-3 border-bottom d-flex justify-content-between mx-4">
 				<div className="d-flex">
-					<img src={props.image} className="img me-5"/>
+					<img src={props.image} className="img me-5 d-none d-md-block" alt="img"/>
 					<div className="card-body p-0">
 						<h5 className="card-text">{props.fullName}</h5>
 						<p className="card-text text-secondary mb-1"><i className="fas fa-map-marker-alt">{props.address}</i></p>
@@ -16,7 +16,7 @@ export const Card = (props) => {
 						<p className="card-text text-secondary"><i className="fas fa-envelope">{props.email}</i></p>
 					</div>
 				</div>
-				<div>
+				<div className="d-flex align-items-center flex-column d-lg-block">
 					<Link to={`/update/${props.id}`}>
 						<span><i className="fas fa-pen m-3 text-dark "/></span>
 					</Link>
