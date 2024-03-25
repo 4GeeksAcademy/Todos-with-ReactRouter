@@ -1,4 +1,4 @@
-const getState = ({ getStore, getActions, setStore }) => {
+const getState = ({ getStore, setStore }) => {
 	return {
 		store: {
 			contacts: []
@@ -26,7 +26,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 				})
 				.then((response) => response.json())
-				.then((data) => console.log(data))
+				.then((data) => {
+					setStore({
+						contacts: getStore().contacts.concat(newContact)
+					});
+				})
 				.catch((error) => console.log(error))
 			},
 			deleteOneContact: (contact_id) => {
@@ -67,13 +71,26 @@ const getState = ({ getStore, getActions, setStore }) => {
 						"Content-Type": "application/json"
 					}
 				})
-				.then((response) => {
-					console.log("Sucess");
-					return response.json();
-				})
+				.then((response) => response.json())
 				.then((data) => {
-					console.log("Error");
-					return console.log(data);})
+					const oldContacts = getStore().contacts;
+					const newContacts = oldContacts.map((elem) => {
+						if (elem.id == contact.id) {
+							return {
+								id: contact.id,
+								full_name: contact.full_name,
+								email: contact.email,
+								agenda_slug: contact.agenda_slug,
+								address: contact.address,
+								phone: contact.phone
+							}
+						}
+						return elem;
+					});
+					setStore({
+						contacts: newContacts
+					})
+				})
 				.catch((error) => console.log(error))
 			},	
 		}

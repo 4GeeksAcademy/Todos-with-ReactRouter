@@ -1,6 +1,7 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext} from "react";
 import { Context } from "../store/appContext";
 import "../../styles/demo.css";
+import { useNavigate } from "react-router-dom";
 
 export const Form = (props) => {
 	const { actions } = useContext(Context);
@@ -8,21 +9,23 @@ export const Form = (props) => {
 	const [email, setEmail] = useState(props.email);
 	const [phone, setPhone] = useState(props.phone);
 	const [address, setAddress] = useState(props.address);
+	const navigate = useNavigate();
 
     const onForm = (data) => {
-        if (props.id === undefined) {
-            actions.createOneContact(data);
-        } else {
-            actions.updateOneContact({
-				id: props.id,
-				full_name: data.full_name,
-				email: data.email,
-				agenda_slug: data.agenda_slug,
-				address: data.address,
-				phone: data.phone
-			});
-        }
-    }
+			if (props.id === undefined) {
+				actions.createOneContact(data);
+			} else {
+				actions.updateOneContact({
+					id: props.id,
+					full_name: data.full_name,
+					email: data.email,
+					agenda_slug: data.agenda_slug,
+					address: data.address,
+					phone: data.phone
+				});
+			};
+			navigate("/");
+	};
 
 	return (
 			<form id="form">
@@ -55,13 +58,13 @@ export const Form = (props) => {
 						value={address}
 					/>
 				</div>
-				<button type="submit" className="btn btn-primary w-100" onClick={() => onForm({
-					full_name: fullName,
-					email: email,
-					agenda_slug: props.agenda_slug,
-					address: address,
-					phone: phone
-				})}>save</button>
+					<button type="submit" className="btn btn-primary w-100" onClick={() => onForm({
+						full_name: fullName,
+						email: email,
+						agenda_slug: props.agenda_slug,
+						address: address,
+						phone: phone
+					})}>save</button>
 			</form>
 	);
 };
